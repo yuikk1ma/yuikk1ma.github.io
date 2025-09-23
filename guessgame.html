@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра "Угадай число"</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        input {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: calc(100% - 22px);
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f098dd;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #f098dd;
+        }
+
+        .message {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Угадай число</h1>
+        <p>Я загадал число от 1 до 100!</p>
+        <input type="number" id="guessInput" placeholder="Ваше число..." min="1" max="100" />
+        <button onclick="checkGuess()">Угадать!</button>
+        <div id="message" class="message"></div>
+        <button onclick="startGame()">Начать заново</button>
+    </div>
+
+    <script>
+        let randomNumber;
+        let attempts = 0;
+
+        function startGame() {
+            randomNumber = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            document.getElementById("message").textContent = "";
+            document.getElementById("guessInput").value = "";
+        }
+
+        function checkGuess() {
+            const guess = Number(document.getElementById("guessInput").value);
+            attempts++;
+
+            if (guess < 1 || guess > 100) {
+                document.getElementById("message").textContent = "Введите число от 1 до 100.";
+            } else if (guess > randomNumber) {
+                document.getElementById("message").textContent = "Слишком большое! Попробуйте еще раз.";
+            } else if (guess < randomNumber) {
+                document.getElementById("message").textContent = "Слишком маленькое! Попробуйте еще раз.";
+            } else {
+                document.getElementById("message").textContent = `Поздравляю! Вы угадали число ${randomNumber} за ${attempts} попыток!`;
+            }
+        }
+
+        // Инициализация игры при загрузке страницы
+        window.onload = startGame;
+    </script>
+
+</body>
+</html>
