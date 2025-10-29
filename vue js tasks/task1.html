@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример Vue.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{ message }}</p>
+        <p>{{ greeting }}</p>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    message: "Привет, Vue!",
+                    name: "Ваше Имя"  // Замените "Ваше Имя" на свое имя
+                };
+            },
+            computed: {
+                greeting() {
+                    return `Привет, ${this.name}!`;
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

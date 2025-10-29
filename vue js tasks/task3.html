@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список задач на Vue.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="newTodo" placeholder="Введите новую задачу">
+        <button @click="addTodo">Добавить</button>
+        
+        <ul>
+            <li v-for="(todo, index) in todos" :key="index">
+                {{ todo }}
+                <button @click="removeTodo(index)">Удалить</button>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    newTodo: '',
+                    todos: ['Выучить Vue', 'Сделать проект']
+                };
+            },
+            methods: {
+                addTodo() {
+                    if (this.newTodo.trim() !== '') {
+                        this.todos.push(this.newTodo); // Добавляем новую задачу
+                        this.newTodo = ''; // Очищаем поле ввода
+                    }
+                },
+                removeTodo(index) {
+                    this.todos.splice(index, 1); // Удаляем задачу по индексу
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

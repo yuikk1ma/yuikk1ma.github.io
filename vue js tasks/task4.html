@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Условное отображение на Vue.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="toggleVisibility">Показать/Скрыть</button>
+
+        <!-- Сначала используем v-if -->
+        <!--
+        <p v-if="isVisible">Этот текст виден только когда isVisible равно true.</p>
+        -->
+
+        <!-- Сначала используем v-show -->
+        <p v-show="isVisible">Этот текст виден только когда isVisible равно true.</p>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    isVisible: false
+                };
+            },
+            methods: {
+                toggleVisibility() {
+                    this.isVisible = !this.isVisible; // Переключаем значение isVisible
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
